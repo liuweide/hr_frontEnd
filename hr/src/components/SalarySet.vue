@@ -211,21 +211,22 @@ export default {
     },
     // 修改薪酬
     modifySalary () {
+      // 先进行表单验证
       this.$refs.modifyFormRef.validate(valid => {
         if (valid === true) {
-          // 验证通过，访问后端接口
-          this.$http.post('/admin/modify_salary', this.modifySalaryForm)
+          // 表单验证通过，访问后端接口，修改薪资信息
+          this.$http.put('/admin/modify_salary', this.modifySalaryForm)
             .then(res => {
               if (res.data.state === 200) {
                 this.modifySalaryDialogVisable = false
                 this.searchSalary()
-                this.$message.success('修改薪酬级别成功')
+                this.$message.success('修改薪资信息成功')
               } else {
-                this.$message.error('修改薪酬级别失败')
+                this.$message.error('修改薪资信息失败')
               }
             })
             .catch(_error => {
-              this.$message.error('修改薪酬级别失败')
+              this.$message.error('修改薪资信息失败')
             })
         }
       })
